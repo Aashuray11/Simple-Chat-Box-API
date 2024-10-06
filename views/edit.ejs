@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Chat</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #e0f7fa 50%, #e1bee7 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+
+        /* Background animation */
+        @keyframes backgroundAnimation {
+            0% {
+                background: linear-gradient(135deg, #e0f7fa 0%, #e0f7fa 50%, #e1bee7 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #e1bee7 0%, #e1bee7 50%, #e0f7fa 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #e0f7fa 0%, #e0f7fa 50%, #e1bee7 100%);
+            }
+        }
+
+        /* Container styling */
+        .container {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Heading styling */
+        h3 {
+            font-size: 28px;
+            color: #4a90e2;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        h3::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: #4a90e2;
+            display: block;
+            margin: 10px auto 0;
+        }
+
+        /* Paragraph styling */
+        p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Bold text styling */
+        b {
+            color: #e94e77;
+            font-weight: bold;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Textarea styling */
+        textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            resize: vertical;
+            margin-bottom: 20px;
+            transition: border 0.3s, box-shadow 0.3s;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        textarea:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+            outline: none;
+        }
+
+        /* Button styling */
+        button {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #357abd, #4a90e2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(53, 122, 189, 0.5);
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            textarea {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Edit your chat: <%= chats._id %></h3>
+        <p>This chat was sent from <b><%= chats.from %></b> to <b><%= chats.to %></b></p>
+        <form  method="POST" action="/Chats/<%=chats._id%>?_method=PUT">
+            <textarea rows="6" cols="50" name="msg" id="msg"><%= chats.msg %></textarea>
+            <button>edited</button>
+        </form>
+    </div>
+</body>
+</html>

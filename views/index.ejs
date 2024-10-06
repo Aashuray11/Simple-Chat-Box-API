@@ -1,0 +1,228 @@
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <link rel="stylesheet" href="style.css">
+    
+   
+</head>
+<body>
+
+    <h3>All chat is here</h3>
+    <form method="GET" action="/chats/new">
+        <button type="submit">Chat</button>
+    </form>
+
+    <% for (let chat of chats) { %>
+        <div class="chats">
+            <p>From: <%= chat.from %></p>
+            <div class="msg">
+                <p><%= chat.msg %></p>
+
+                <form method="get" action="/chats/<%=chat.id%>/edit">
+                    <button class="edit">Edit</button>
+                </form>
+                <form method="post" action="/chats/<%=chat.id%>?_method=DELETE">
+                    <button >delete</button>
+                </form>
+            </div>
+            <p>Received by <%= chat.to %></p>
+            <hr>
+            <p ><%=chat.created_at.toString().split(" ")[4]%></p>
+            <p ><%=chat.created_at.toString().split(" ").slice(0, 4).join(" ")%></p>
+        </div>
+        <br>
+        <br>
+    <% } %>
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+            margin: 0;
+            padding: 20px;
+            color: #343a40;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bgColorTransition 10s infinite alternate;
+        }
+        @keyframes bgColorTransition {
+            0% {
+                background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+            }
+            50% {
+                background: linear-gradient(135deg, #d4e4ff, #e9ecef);
+            }
+            100% {
+                background: linear-gradient(135deg, #f8f9fa, #d4e4ff);
+            }
+        }
+        h3 {
+            color: #007BFF;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px #dee2e6;
+        }
+        .form-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 30px;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .chats {
+            background-color: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .chats:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .chats p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        .msg {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 6px solid #007BFF;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            font-size: 1em;
+            position: relative;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .msg::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 100%;
+            background: #007BFF;
+        }
+        .edit, .delete {
+            padding: 5px 10px;
+            margin: 0 5px;
+            font-size: 0.8em;
+        }
+        .edit {
+            background-color: #28a745;
+        }
+        .edit:hover {
+            background-color: #218838;
+        }
+        .delete {
+            background-color: #dc3545;
+        }
+        .delete:hover {
+            background-color: #c82333;
+        }
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 10px 0;
+        }
+        .timestamp {
+            color: #6c757d;
+            font-size: 0.95em; /* Increased font size */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            h3 {
+                font-size: 1.8em;
+            }
+            button {
+                width: 100%;
+                margin: 10px 0;
+                font-size: 1em;
+            }
+            .chats {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h3>All chat is here</h3>
+    <div class="form-container">
+        <form method="GET" action="/chats/new">
+            <button type="submit">Chat</button>
+        </form>
+    </div>
+
+    <% for (let chat of chats) { %>
+        <div class="chats">
+            <p>From: <%= chat.from %></p>
+            <div class="msg">
+                <p><%= chat.msg %></p>
+                <div class="button-group">
+                    <form method="get" action="/chats/<%=chat.id%>/edit">
+                        <button class="edit">Edit</button>
+                    </form>
+                    <form method="post" action="/chats/<%=chat.id%>?_method=DELETE">
+                        <button class="delete">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <p>Received by: <%= chat.to %></p>
+            <hr>
+            <p class="timestamp"><%=chat.created_at.toString().split(" ")[4]%></p>
+            <p class="timestamp"><%=chat.created_at.toString().split(" ").slice(0, 4).join(" ")%></p>
+        </div>
+    <% } %>
+
+</body>
+</html>

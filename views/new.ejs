@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        form input[type="text"],
+        form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        form input[type="text"]:focus,
+        form textarea:focus {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+
+        form textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        form button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #2575fc;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #6a11cb;
+            transform: scale(1.05);
+        }
+
+        form button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <form method="POST" action="/chats">
+        <input type="text" name="from" placeholder="Who are you">
+        <textarea name="msg" id="msg">Write your message</textarea>
+        <input type="text" placeholder="Add receiver" name="to">
+        <button>Create a Chat</button>
+    </form>
+
+</body>
+</html>
