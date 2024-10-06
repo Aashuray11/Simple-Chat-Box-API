@@ -80,4 +80,4 @@ This project is a **Simple Chat Box API** built using **Express.js** and **Mongo
 - **Use Case**: Use this method to make small changes to a message without altering other parts of it.
 
 ---
-![alt text](chat.png)
+![alt text](image.png)
